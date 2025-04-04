@@ -1,103 +1,38 @@
-import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = { // o metadadta serve para SEO, que é o que faz o google indexar sua página. Pode ser adicionado no layout.tsx, mas aqui fica mais fácil de entender, se tiver em layout.tsx todas as outras paginas vão herdar o mesmo metadata, caso não tenha, mas se tiver, cada página pode ter um metadata diferente
+  title: "Aprendendo Next.js",
+  description: "tutorial de Next.js",
+  openGraph: { // aqui você pode adicionar o openGraph, serve para SEO, que é o que faz o google indexar sua página
+    title: "Aprendendo Next.js",
+    description: "tutorial de Next.js",
+    images: "https://i.ytimg.com/vi/5xb8yocXWL4/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gEygTMA8=&rs=AOn4CLC7G3DSDlRSZ5YR-pFfqKIcBR18ww", // images é o link da imagem que vai aparecer quando você compartilhar o link no facebook, por exemplo
+    url: "https://www.youtube.com/watch?v=5xb8yocXWL4", // url é o link do vídeo que você está compartilhando
+    siteName: "Aprendendo Next.js",
+    type: "website", // type é o tipo de conteúdo que você está compartilhando, pode ser website, article, video, etc
+    locale: "pt-BR", // locale é o idioma do conteúdo que você está compartilhando, pode ser pt-BR, en-US, etc
+  },
+  robots: {
+    index: true, // index é se o conteúdo deve ser indexado pelo google ou não
+    follow: true, // follow é se o google deve seguir os links do conteúdo ou não
+    nocache: true, // nocache é se o google deve armazenar em cache o conteúdo ou não
+    noarchive: true, // noarchive é se o google deve armazenar em cache o conteúdo ou não
+    googleBot: {
+      index: true, // index é se o google deve indexar o conteúdo ou não
+      follow: true, // follow é se o google deve seguir os links do conteúdo ou não
+      noimageindex: false, // noimageindex é se o google deve indexar as imagens do conteúdo ou não
+      noarchive: false, // noarchive é se o google deve armazenar em cache o conteúdo ou não
+      nosnippet: false, // nosnippet é se o google deve mostrar um snippet do conteúdo ou não
+      notranslate: false, // notranslate é se o google deve traduzir o conteúdo ou não
+    }, // googleBot é se o google deve seguir os links do conteúdo ou não
+  }
+}
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <h1 className="text-4xl font-bold">Home</h1>
+      <a href="/contatos">contatos</a>
     </div>
   );
 }
