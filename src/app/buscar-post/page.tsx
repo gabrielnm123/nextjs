@@ -1,5 +1,7 @@
 // src/app/posts/[id]/page.tsx
 
+// aqui acontece tudo no lado do servidor, ate a recsição dos dados no lado do servidor quando o cliente interage com o servidor, o que faz com que o componente seja renderizado novamente quando os dados forem carregados
+
 import { redirect } from 'next/navigation';
 
 interface PostProps {
