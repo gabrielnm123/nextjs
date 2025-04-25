@@ -50,9 +50,9 @@ interface PostProps {
   userId: number;
 }
 
-interface ResponseProps {
-  posts: PostProps[];
-}
+// interface ResponseProps {
+//   posts: PostProps[];
+// }
 
 export default function PostsPage() {
   const [posts, setPosts] = useState<PostProps[]>([]); // hooks so podem ser usados em components clients, em componentes server não pode
