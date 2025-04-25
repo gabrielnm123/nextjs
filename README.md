@@ -34,3 +34,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 📑 Roteiro da `Guia Next JS completo`
+
+- [x] Criação projetos
+- [x] Entender a estrutura de pastas do Next JS
+- [x] Roteamento e navegação paginas:
+  - [x] Not found
+- [x] Metadata (SEO)
+- [x] Serverx Client component
+- [x] Actions
+- [x] Rotas Dinamicas
+- [ ] Revalidate, Cache
+- [ ] Cache Fetch
+  - [ ] Exemplo
+- [ ] Middleware
+- [ ] Route Handlers
+
+## 📦 Resumo das Respostas para o `create-next-app`
+
+### Perguntas e Respostas
+
+- **What is your project named?**  
+  ✅ `nextjs`
+
+- **Would you like to use TypeScript?**  
+  ✅ Yes
+
+- **Would you like to use ESLint?**  
+  ✅ Yes
+
+- **Would you like to use Tailwind CSS?**  
+  ✅ Yes
+
+- **Would you like your code inside a `src/` directory?**  
+  ✅ Yes
+
+- **Would you like to use App Router? (recommended)**  
+  ✅ Yes
+
+- **Would you like to use Turbopack for `next dev`?**  
+  ❌ No
+
+- **Would you like to customize the import alias (`@/*` by default)?**  
+  ✅ Yes
+
+- **What import alias would you like configured?**  
+  ✅ `@/*`
+  
