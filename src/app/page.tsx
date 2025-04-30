@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = { // o metadadta serve para SEO, que é o que faz o google indexar sua página. Pode ser adicionado no layout.tsx, mas aqui fica mais fácil de entender, se tiver em layout.tsx todas as outras paginas vão herdar o mesmo metadata, caso não tenha, mas se tiver, cada página pode ter um metadata diferente
   title: "Aprendendo Next.js",
   description: "tutorial de Next.js",
-  openGraph: { // aqui você pode adicionar o openGraph, serve para SEO, que é o que faz o google indexar sua página
+  openGraph: { // aqui você pode adicionar o openGraph, serve para SEO, que é o que faz o google indexar sua página. aqui cria uma imagem de preview do conteúdo que você está compartilhando, como por exemplo quando você compartilha o link no facebook, ele vai pegar a imagem que você colocar aqui
     title: "Aprendendo Next.js",
     description: "tutorial de Next.js",
     images: "https://i.ytimg.com/vi/5xb8yocXWL4/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gEygTMA8=&rs=AOn4CLC7G3DSDlRSZ5YR-pFfqKIcBR18ww", // images é o link da imagem que vai aparecer quando você compartilhar o link no facebook, por exemplo
