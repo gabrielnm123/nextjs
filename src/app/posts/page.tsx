@@ -23,8 +23,10 @@ export default async function PostsPage() {
 
   console.log(data);
 
-  async function handleFetchPosts() { // aqui a interatividade acontece, pois estou usando o use client, o que faz com que o componente seja renderizado novamente quando os dados forem carregados
-    'use server';
+  async function handleFetchPosts() { // para o erro: Os manipuladores de não podem ser passados para as propriedades do Client Component
+    // 'use client'; // se eu colocar isso aqui, o componente vai ser renderizado no lado do cliente, o que não é o que queremos
+    // o que queremos é que o componente seja renderizado no lado do servidor, então não precisamos colocar isso aqui
+    'use server'; // isso evita o erro e faz o que queremos
 
     const response = await fetch('https://dummyjson.com/posts');
     const data: ResponseProps = await response.json();
@@ -35,7 +37,7 @@ export default async function PostsPage() {
   async function handleSearchUsers(formData: FormData) {
     'use server'
     
-    const userId = formData.get('userId')
+    const userId = formData.get('userId') // aqui pego o valor do input, o formData é um objeto que contém os dados do formulário, então posso usar o método get para pegar o valor do input com o name userId
     
     const response = await fetch(`https://dummyjson.com/posts/user/${userId}`)
     const data: ResponseProps = await response. json()
@@ -52,7 +54,7 @@ export default async function PostsPage() {
         Fetch Posts
       </button>
 
-      <form className="flex gap-2 my-4" action={handleSearchUsers}>
+      <form className="flex gap-2 my-4" action={handleSearchUsers}> {/* action passo uma função para o form que posso usar o parametro formData pra passar valores */}
         <input
           type="text"
           placeholder="ID do usuário"
