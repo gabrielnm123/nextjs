@@ -16,7 +16,12 @@ interface ResponseProps {
 }
 
 export default async function PostsPage() {
-  const response = await fetch('https://dummyjson.com/posts');
+  const response = await fetch('https://dummyjson.com/posts', {
+    cache: "force-cache", // força o cache, ou seja, não vai fazer a requisição novamente, só vai usar o que já está no cache
+    next: {
+      revalidate: 60, // revalida a cada 60 segundos, ou seja, se a requisição demorar mais que isso, ele vai fazer a requisição novamente
+    }
+  });
   const json = await response.json();
 
   const data: ResponseProps = { posts: json.posts };
@@ -36,12 +41,12 @@ export default async function PostsPage() {
 
   async function handleSearchUsers(formData: FormData) {
     'use server'
-    
+
     const userId = formData.get('userId') // aqui pego o valor do input, o formData é um objeto que contém os dados do formulário, então posso usar o método get para pegar o valor do input com o name userId
-    
+
     const response = await fetch(`https://dummyjson.com/posts/user/${userId}`)
-    const data: ResponseProps = await response. json()
-    
+    const data: ResponseProps = await response.json()
+
     console.log(data)
   }
 

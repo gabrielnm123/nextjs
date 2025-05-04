@@ -45,11 +45,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - [x] Serverx Client component
 - [x] Actions
 - [x] Rotas Dinamicas
-- [ ] Revalidate, Cache
-- [ ] Cache Fetch
-  - [ ] Exemplo
-- [ ] Middleware
-- [ ] Route Handlers
+- [x] Lounding UI e Streming
+- [x] Revalidate, Cache
+- [x] Cache Fetch
+- [x] Middleware
+- [x] Route Handlers
 
 ## 📦 Resumo das Respostas para o `create-next-app`
 

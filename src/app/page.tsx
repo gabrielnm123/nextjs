@@ -28,11 +28,17 @@ export const metadata: Metadata = { // o metadadta serve para SEO, que é o que 
   }
 }
 
+export const revalidate = 60; // revalida a cada 60 segundos, ou seja, se a requisição demorar mais que isso, ele vai fazer a requisição novamente
+
 export default function Home() {
+
+  const randomNumber = Math.random() * 100; // gera um número aleatório entre 0 e 100
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-4xl font-bold">Home</h1>
       <a href="/contatos">contatos</a>
+      <h2 className="text-2xl font-bold">Número aleatório: {randomNumber}</h2>
     </div>
   );
 }
