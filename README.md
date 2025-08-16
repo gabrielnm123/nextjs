@@ -1,84 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
+Este é um projeto Next.js inicializado com create-next-app.Primeiros PassosPrimeiro, execute o servidor de desenvolvimento:npm run dev
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
-```
+Abra http://localhost:3000 no seu navegador para ver o resultado.Você pode começar a editar a página modificando src/app/page.tsx. A página é atualizada automaticamente conforme você edita o arquivo.Este projeto usa next/font para otimizar e carregar automaticamente a Geist, uma nova família de fontes da Vercel.Aprenda MaisPara aprender mais sobre o Next.js, dê uma olhada nos seguintes recursos:Documentação do Next.js - aprenda sobre os recursos e a API do Next.js.Aprenda Next.js - um tutorial interativo de Next.js.Você pode conferir o repositório do Next.js no GitHub - seu feedback e contribuições são bem-vindos!Implantar na VercelA maneira mais fácil de implantar seu aplicativo Next.js é usando a Plataforma Vercel, dos criadores do Next.js.Confira nossa documentação de implantação do Next.js para mais detalhes.📑 Guia Next.js Completo (Baseado no Roteiro)Este guia detalha os principais conceitos do Next.js 14+ com App Router, seguindo o roteiro de estudos.✅ Criação de Projetos e Estrutura de PastasCriação: O projeto é iniciado com npx create-next-app@latest. As configurações escolhidas para este projeto estão detalhadas no final deste README.Estrutura Principal (/src/app): O App Router utiliza uma estrutura de pastas dentro de /app para definir rotas e a interface do usuário.layout.tsx: Define o layout principal que envolve todas as páginas (root layout). É aqui que se deve colocar a estrutura <html> e <body>. Layouts podem ser aninhados em outras pastas de rota.page.tsx: Representa a UI exclusiva de uma rota. É o componente que será renderizado para a URL correspondente à sua localização na estrutura de pastas.template.tsx: Similar a um layout, mas recria uma nova instância para cada filho ao navegar, ou seja, o estado não é preservado. Útil para animações de entrada/saída.Arquivos Especiais: O Next.js usa arquivos com nomes especiais para criar UI com significado específico:loading.tsx: Cria uma UI de carregamento com React Suspense.not-found.tsx: Cria uma UI para páginas não encontradas.error.tsx: Cria uma UI para erros, isolando o erro em um segmento específico e permitindo uma tentativa de recuperação.route.ts: Permite criar endpoints de API (Route Handlers).✅ Roteamento e NavegaçãoRoteamento Baseado em Arquivos: Cada pasta dentro de /app cria um segmento de URL. app/dashboard/settings/page.tsx corresponde à URL /dashboard/settings.Navegação (<Link>): Para navegar entre páginas, utiliza-se o componente <Link href="/caminho">. Ele habilita a navegação no lado do cliente (Client-Side Navigation), que é mais rápida por não recarregar a página inteira.not-found.tsx: Quando um usuário tenta acessar uma rota que não existe, o Next.js renderiza automaticamente o componente definido em app/not-found.tsx.✅ Metadata (SEO)Otimização para Buscadores: Metadados são essenciais para SEO. No Next.js, eles podem ser definidos de duas formas:Estática: Exporte um objeto metadata de um layout.tsx ou page.tsx.import { Metadata } from 'next';
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+export const metadata: Metadata = {
+  title: 'Título da Página',
+  description: 'Descrição da página para SEO.',
+};
+Dinâmica: Use a função generateMetadata para criar metadados baseados em parâmetros dinâmicos (ex: o nome de um produto vindo do banco de dados).✅ Server vs. Client ComponentServer Components (Padrão): Todos os componentes no App Router são Server Components por padrão.Onde rodam: Exclusivamente no servidor.Vantagens: Acesso direto a recursos de backend (banco de dados, APIs internas), código não é enviado para o cliente (reduz o bundle size), mais seguro.Client Components: Para adicionar interatividade (eventos onClick, onChange, hooks como useState, useEffect), você precisa optar por um Client Component.Como usar: Adicione a diretiva "use client"; no topo do arquivo.Onde rodam: São pré-renderizados no servidor e depois "hidratados" para se tornarem interativos no cliente.Quando usar: Apenas quando for estritamente necessário ter interatividade ou acesso a APIs do navegador. A recomendação é manter a interatividade nas "folhas" da sua árvore de componentes.✅ Actions (Server Actions)Mutações de Dados Simplificadas: Server Actions são funções assíncronas que rodam no servidor, projetadas para simplificar a mutação de dados (ex: envio de formulários). Elas eliminam a necessidade de criar endpoints de API manuais para essas tarefas.Como usar: Crie uma função e adicione a diretiva "use server"; no topo da função ou do arquivo.'use server';
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+export async function criarItem(formData: FormData) {
+  // Lógica para salvar os dados no banco
+}
+Uso: Podem ser chamadas diretamente em formulários (<form action={criarItem}>) ou em Client Components.✅ Rotas DinâmicasCriando Segmentos Dinâmicos: Para criar páginas cujo conteúdo depende de um parâmetro na URL (ex: um post de blog, um perfil de usuário), use colchetes na nomenclatura da pasta: app/blog/[slug]/page.tsx.Acessando Parâmetros: O componente da página receberá os parâmetros através das props.export default function Page({ params }: { params: { slug: string } }) {
+  return <div>Meu Post: {params.slug}</div>;
+}
+✅ Loading UI e StreamingMelhorando a UX: Ao criar um arquivo loading.tsx em uma pasta de rota, o Next.js automaticamente envolverá sua page.tsx com um React Suspense Boundary.Como funciona: Enquanto os dados da página estão sendo carregados no servidor, o Next.js renderiza imediatamente o loading.tsx. Quando os dados ficam prontos, o conteúdo final é enviado via "streaming" e substitui o loading UI, sem um recarregamento completo da página.✅ Cache e RevalidaçãoCache de Dados (fetch): O Next.js estende a API fetch para gerenciar o cache de forma granular.cache: 'force-cache' (Padrão): O resultado do fetch é cacheado indefinidamente. Ótimo para dados que não mudam.cache: 'no-store': O fetch é executado a cada requisição, garantindo dados sempre atualizados (renderização dinâmica).next: { revalidate: segundos }: O dado é cacheado, mas será revalidado (buscado novamente) após o tempo especificado (em segundos). Isso é Incremental Static Regeneration (ISR).Revalidação On-Demand: Permite invalidar o cache manualmente, geralmente após uma mutação de dados.revalidatePath('/caminho'): Invalida o cache para uma rota específica.revalidateTag('tag-do-cache'): Invalida o cache para todos os fetch que foram marcados com uma tag específica. É a forma mais flexível e é comumente usada dentro de Server Actions.✅ MiddlewareCódigo que Roda Antes da Requisição: Um middleware é uma função exportada de um arquivo src/middleware.ts que executa no servidor antes de uma requisição ser completada.Casos de Uso:Autenticação e proteção de rotas.Redirecionamentos.Modificar cabeçalhos de requisição/resposta.Análise de A/B tests.✅ Route HandlersAPIs no App Router: São o equivalente às "API Routes" do antigo Pages Router. Permitem criar endpoints de API customizados.Como criar: Crie um arquivo route.ts dentro de uma pasta de rota e exporte funções nomeadas com os métodos HTTP (GET, POST, PUT, DELETE, etc.).// app/api/users/route.ts
+import { NextResponse } from 'next/server';
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## 📑 Roteiro da `Guia Next JS completo`
-
-- [x] Criação projetos
-- [x] Entender a estrutura de pastas do Next JS
-- [x] Roteamento e navegação paginas:
-  - [x] Not found
-- [x] Metadata (SEO)
-- [x] Serverx Client component
-- [x] Actions
-- [x] Rotas Dinamicas
-- [x] Lounding UI e Streming
-- [x] Revalidate, Cache
-- [x] Cache Fetch
-- [x] Middleware
-- [x] Route Handlers
-
-## 📦 Resumo das Respostas para o `create-next-app`
-
-### Perguntas e Respostas
-
-- **What is your project named?**  
-  ✅ `nextjs`
-
-- **Would you like to use TypeScript?**  
-  ✅ Yes
-
-- **Would you like to use ESLint?**  
-  ✅ Yes
-
-- **Would you like to use Tailwind CSS?**  
-  ✅ Yes
-
-- **Would you like your code inside a `src/` directory?**  
-  ✅ Yes
-
-- **Would you like to use App Router? (recommended)**  
-  ✅ Yes
-
-- **Would you like to use Turbopack for `next dev`?**  
-  ❌ No
-
-- **Would you like to customize the import alias (`@/*` by default)?**  
-  ✅ Yes
-
-- **What import alias would you like configured?**  
-  ✅ `@/*`
-  
+export async function GET() {
+  const users = [{ id: 1, name: 'João' }];
+  return NextResponse.json({ users });
+}
+Este código cria um endpoint acessível em /api/users que responde a requisições GET.📦 Resumo das Respostas para o create-next-appPerguntas e RespostasQual o nome do seu projeto?✅ nextjsVocê gostaria de usar TypeScript?✅ SimVocê gostaria de usar ESLint?✅ SimVocê gostaria de usar Tailwind CSS?✅ SimVocê gostaria de colocar seu código em um diretório src/?✅ SimVocê gostaria de usar o App Router? (recomendado)✅ SimVocê gostaria de usar o Turbopack para next dev?❌ NãoVocê gostaria de personalizar o alias de importação (@/* por padrão)?✅ SimQual alias de importação você gostaria de configurar?✅ @/*
